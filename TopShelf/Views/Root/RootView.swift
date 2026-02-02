@@ -51,8 +51,7 @@ struct RootView: View {
         destination(for: route)
       }
     }
-    .onChange(of: path) { _, newValue in
-      
+    .onChange(of: path) { newValue in
       guard !newValue.isEmpty else {
         storedPathData = Data()
         return
