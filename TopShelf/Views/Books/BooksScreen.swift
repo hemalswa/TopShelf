@@ -26,19 +26,26 @@ struct BooksScreen: View {
   }
   
   var body: some View {
-    List(books) { book in
-      Button {
-        onSelectBook(book)
-      } label: {
-        HStack {
-          Text(book.name)
-          Spacer()
-          
-        }
+      List(books) { book in
+          Button {
+              onSelectBook(book)
+          } label: {
+              HStack(spacing: 12) {
+                  Image(systemName: "book.fill")
+                  
+                  Text(book.name)
+                  
+                  Spacer()
+                  
+                  Image(systemName: "chevron.right")
+                      .foregroundColor(.secondary)
+              }
+              .padding(.vertical, 6)
+          }
       }
-    }
-    .navigationTitle("Books")
+      .navigationTitle("\((pricing == .free ? "Free Books" : "Premium Books"))")
   }
+
 }
 
 

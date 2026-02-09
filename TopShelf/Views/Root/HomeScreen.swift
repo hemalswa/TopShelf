@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  HomeScreen.swift
 //  TopShelf
 //
 //  Created by Hemal Swarnasiri on 2026-02-02.
@@ -14,7 +14,7 @@ enum PricingType: String, CaseIterable, Identifiable, Codable {
   var id: String { rawValue }
 }
 
-struct RootView: View {
+struct HomeScreen: View {
   
   @State private var selectedPricing: PricingType = .free
   
@@ -27,25 +27,38 @@ struct RootView: View {
   
   var body: some View {
     NavigationStack(path: $path) {
+      
       VStack(spacing: 16) {
-        
-        Picker("Pricing", selection: $selectedPricing) {
-          ForEach(PricingType.allCases) { pricing in
-            Text(pricing.rawValue)
-              .tag(pricing)
-          }
-        }
-        .pickerStyle(.segmented)
-        
-        Button("Show Podcasts") {
-          path.append(Route.podcasts(.list(pricing: selectedPricing)))
-        }
-        
-        Button("Show Books") {
-          path.append(Route.books(.list(pricing: selectedPricing)))
           
-        }
+          Picker("Pricing", selection: $selectedPricing) {
+              ForEach(PricingType.allCases) { pricing in
+                  Text(pricing.rawValue)
+                      .tag(pricing)
+              }
+          }
+          .pickerStyle(.segmented)
+          
+          VStack(spacing: 24) {
+              Button {
+                  path.append(Route.podcasts(.list(pricing: selectedPricing)))
+              } label: {
+                  Label("Show Podcasts", systemImage: "mic.fill")
+              }
+              .buttonStyle(.borderedProminent)
+              
+              Button {
+                  path.append(Route.books(.list(pricing: selectedPricing)))
+              } label: {
+                  Label("Show Books", systemImage: "book.fill")
+              }
+              .buttonStyle(.bordered)
+          }
+          .padding(.top, 24)
+          
+          Spacer()
       }
+      .navigationTitle("Home")
+      .navigationBarTitleDisplayMode(.inline)
       .padding()
       .navigationDestination(for: Route.self) { route in
         destination(for: route)
@@ -114,5 +127,5 @@ struct RootView: View {
 
 
 #Preview {
-  RootView()
+  HomeScreen()
 }

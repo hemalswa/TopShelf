@@ -11,7 +11,7 @@ import SwiftUI
 struct TopShelfMainApp: App {
   var body: some Scene {
     WindowGroup {
-      RootView()
+      HomeScreen()
     }
   }
 }

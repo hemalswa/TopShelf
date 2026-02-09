@@ -26,18 +26,26 @@ struct PodcastsScreen: View {
   }
   
   var body: some View {
-    List(podcasts) { podcast in
-      Button {
-        onSelectPodcast(podcast)
-      } label: {
-        HStack {
-          Text(podcast.name)
-          Spacer()
-        }
+      List(podcasts) { podcast in
+          Button {
+            onSelectPodcast(podcast)
+          } label: {
+              HStack(spacing: 12) {
+                  Image(systemName: "mic.fill")
+                  
+                  Text(podcast.name)
+                  
+                  Spacer()
+                  
+                  Image(systemName: "chevron.right")
+                      .foregroundColor(.secondary)
+              }
+              .padding(.vertical, 6)
+          }
       }
-    }
-    .navigationTitle("Podcasts")
+      .navigationTitle("\((pricing == .free ? "Free Podcasts" : "Paid Podcasts"))")
   }
+  
 }
 
 

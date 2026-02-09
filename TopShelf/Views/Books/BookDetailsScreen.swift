@@ -21,13 +21,41 @@ struct BookDetailsScreen: View {
   }
   
   var body: some View {
-    VStack {
-      Text(book.name)
-      Button("Go to Root view") {
-        onGoToRoot()
+      VStack(spacing: 24) {
+
+          VStack(spacing: 12) {
+              Image(systemName: "book.fill")
+                  .font(.system(size: 48))
+                  .foregroundColor(.accentColor)
+
+              Text(book.name)
+                  .font(.title)
+                  .fontWeight(.semibold)
+          }
+          .padding()
+          .frame(maxWidth: .infinity)
+          .background(
+              RoundedRectangle(cornerRadius: 16)
+                  .fill(Color(.systemBackground))
+                  .shadow(radius: 4)
+          )
+          Spacer()
       }
-    }
+      .padding(.top, 24)
+      .padding(.horizontal)
+      .navigationTitle("Book Details")
+      .navigationBarTitleDisplayMode(.inline)
+      .toolbar {
+          ToolbarItem(placement: .navigationBarTrailing) {
+              Button {
+                  onGoToRoot()
+              } label: {
+                  Image(systemName: "house.fill")
+              }
+          }
+      }
   }
+
 }
 
 

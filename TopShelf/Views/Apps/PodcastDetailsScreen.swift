@@ -21,12 +21,39 @@ struct PodcastDetailsScreen: View {
   }
   
   var body: some View {
-    VStack {
-      Text(podcast.name)
-      Button("Go to Root view") {
-        onGoToRoot()
+      VStack(spacing: 24) {
+
+          VStack(spacing: 12) {
+              Image(systemName: "mic.fill")
+                  .font(.system(size: 48))
+                  .foregroundColor(.accentColor)
+
+              Text(podcast.name)
+                  .font(.title)
+                  .fontWeight(.semibold)
+          }
+          .padding()
+          .frame(maxWidth: .infinity)
+          .background(
+              RoundedRectangle(cornerRadius: 16)
+                  .fill(Color(.systemBackground))
+                  .shadow(radius: 4)
+          )
+          Spacer()
       }
-    }
+      .padding(.top, 24)
+      .padding(.horizontal)
+      .navigationTitle("Podcast Details")
+      .navigationBarTitleDisplayMode(.inline)
+      .toolbar {
+          ToolbarItem(placement: .navigationBarTrailing) {
+              Button {
+                  onGoToRoot()
+              } label: {
+                  Image(systemName: "house.fill")
+              }
+          }
+      }
   }
 }
 
